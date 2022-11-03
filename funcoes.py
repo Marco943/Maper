@@ -98,7 +98,7 @@ def extrair_dados_lideranca(relatorio):
     cargo = re.findall(r'(?:CARGO|PROFESIONAL):\n(.*)\n', txt)[0].strip() # Pega os trechos que estão entre duas quebras de linhas e que pode ter CARGO: ou PROFESIONAL: antes
 
     # Achar competências e notas e extrair
-    competencias = re.findall(r'\n\d\d?\s-\s(.*)\n', txt)               # Pega os trechos que contêm antes deles 'espaço hífen espaço' e que tem um ou dois dígitos antes (são os números das competências)
+    # competencias = re.findall(r'\n\d\d?\s-\s(.*)\n', txt)               # Pega os trechos que contêm antes deles 'espaço hífen espaço' e que tem um ou dois dígitos antes (são os números das competências)
     notas = re.findall(r'\n(\d\d?)\n(?:\d\d?\s-|página|Página)', txt)   # Pega os trechos onde tem um número de um ou dois dígitos (\d\d?) que está depois de um parágrafo (\n) e antes de: Um texto que começa com um ou dois números, tem um espaço e um hífen; um texto 'página'; um texto 'Página'
 
     # Achar Estilo de liderança
@@ -108,7 +108,7 @@ def extrair_dados_lideranca(relatorio):
 
     # Inicializar dataset com informações básicas
     resposta = {'Nome': [nome], 'Cargo': [cargo], 'Notas': 'Coaching', 'Estilo de Liderança': estilo}
-
+    competencias = ['Capacidade de planejamento', 'Capacidade de organização','Liderança COACH','Liderança Motivacional','Estilo de comunicação','Tomada de decisão','Capacidade de delegação','Administração do tempo','Volume de trabalho','Potencial criativo','Capacidade de Priorização e Imprevistos','Gestão de mudanças','Relacionamento com superiores','Gestão de conflitos','Controle das emoções','Relações de confiança','Relacionamento em grupos','Imagem pessoal', 'Tônus vital','Necessidade de realização']
     # Anexar competências e notas ao dataset
     for competencia, nota in zip(competencias, notas):
         resposta[competencia] = nota
